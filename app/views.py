@@ -32,12 +32,12 @@ def upload():
         abort(401)
 
     # Instantiate your form class
+    if request.method =='POSt':
+        file = request.files['file']
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(file_folder, filename))
 
-    # Validate file upload on submit
-    if request.method == 'POST':
-        # Get file data and save to your uploads folder
-
-        flash('File Saved', 'success')
+        flash('File Saved')
         return redirect(url_for('home'))
 
     return render_template('upload.html')
